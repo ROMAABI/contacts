@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Contact App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
       home: const ContactListScreen(),
@@ -106,14 +106,24 @@ class _ContactListScreenState extends State<ContactListScreen> {
                       ),
                       subtitle: Text(contact.phoneNumber,
                           style: const TextStyle(color: Colors.white)),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.phone, color: Colors.green),
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text("Calling ${contact.name}...")),
-                          );
-                        },
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.phone, color: Colors.green),
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content:
+                                        Text("Calling ${contact.name}...")),
+                              );
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () => _deleteContact(index),
+                          ),
+                        ],
                       ),
                     ),
                   );
